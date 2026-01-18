@@ -1,0 +1,16 @@
+[build-system]
+requires = ["uv_build >= 0.9.11"]
+build-backend = "uv_build"
+
+[project]
+name = "fimkin"
+version = "0.2.8"
+authors = [ 
+    { name="Martin Slepicka", email="martin.slepicka@tum.de" },
+    ]
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.2.6",
+]
