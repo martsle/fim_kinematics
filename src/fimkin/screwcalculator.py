@@ -165,7 +165,9 @@ class Screwkincalc(KinematicsCalculator):
         p2_last  = (self.W1 * np.sqrt(MQ2 - self.W1**2) / MQ2) * np.array([-Q[1], Q[0]])
         p2 = p2_first + p2_last
         cos1 = np.dot([0,-1], p2) / np.linalg.norm(p2)
-        sin1 = np.cross([0,-1], p2) / np.linalg.norm(p2)
+        # z-component of the 2-D cross product [0, -1] x p2. NumPy no
+        # longer accepts two-dimensional vectors in np.cross.
+        sin1 = p2[0] / np.linalg.norm(p2)
         theta1 = np.arctan2(sin1,cos1)
 
         test, theta1 = self.check_theta(prev_pose[0], theta1)
@@ -173,7 +175,7 @@ class Screwkincalc(KinematicsCalculator):
         if test:
             p2 = p2_first - p2_last
             cos1 = np.dot([0,-1],p2)/(np.linalg.norm(p2))
-            sin1 = np.cross([0,-1],p2)/(np.linalg.norm(p2))
+            sin1 = p2[0]/(np.linalg.norm(p2))
 
             theta1 = np.arctan2(sin1,cos1)
             test, theta1 = self.check_theta(prev_pose[0], theta1)
